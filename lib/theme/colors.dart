@@ -10,4 +10,5 @@ class CustomColors {
   static Color darkBlueGradient = const Color(0xff126CF4);
   static Color bottomBlackColor = const Color(0xff000A18);
   static Color backgroundColor = const Color(0xff12ABFE);
+  static Color serpartorColor = const Color(0xff0A1524);
 }
