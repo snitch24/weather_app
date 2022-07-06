@@ -38,6 +38,7 @@ dependencies:
   http: ^0.13.4
   intl: ^0.17.0
   location: ^4.4.0
+  scrollable_positioned_list: ^0.3.2
   unicons: ^2.1.0
 
 dev_dependencies:
