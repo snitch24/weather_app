@@ -67,30 +67,8 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class BottomCardBuilder extends StatefulWidget {
-  const BottomCardBuilder({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<BottomCardBuilder> createState() => _BottomCardBuilderState();
-}
-
-class _BottomCardBuilderState extends State<BottomCardBuilder> {
-  
-  int indexToMove = 0;
-  @override
-  void initState() {
-    // TODO: implement initState
-  
-    super.initState();
-    // WidgetsBinding.instance.addPostFrameCallback(
-    //   (_) => itemScrollController.scrollTo(
-    //     index: indexToMove,
-    //     duration: const Duration(milliseconds: 1000),
-    //   ),
-    // );
-  }
+class BottomCardBuilder extends StatelessWidget {
+  const BottomCardBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +82,6 @@ class _BottomCardBuilderState extends State<BottomCardBuilder> {
         }
         if (snapshot.hasData) {
           return ListView.builder(
-  
             scrollDirection: Axis.horizontal,
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
@@ -112,11 +89,7 @@ class _BottomCardBuilderState extends State<BottomCardBuilder> {
                 "${snapshot.data![index].localTime}:00.000000",
               );
               bool isSelected = DateTime.now().hour == dataTime.hour;
-              if (isSelected) {
-                setState(() {
-                  indexToMove = index;
-                });
-              }
+
               return BottomCard(
                 temperature:
                     snapshot.data![index].tempCelcius.toInt().toString(),
