@@ -1,12 +1,11 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:weather_app/utilities/constants.dart';
 import 'package:weather_app/models/location.dart';
-import 'package:weather_app/models/current_weather.dart';
-import 'models/forecast_weather.dart';
+import 'package:weather_app/models/weather.dart';
+import 'models/hour_weather.dart';
 
 class WeatherApi {
   WeatherApi._privateConstructor();
@@ -38,7 +37,7 @@ class WeatherApi {
   Future<CurrentWeather> fetchWeatherFromCity(String cityName) async {
     final weatherResponse = await http.get(
       Uri.parse(
-          '${_constants.getBaseUrl}current.json?key=${_constants.getApiKey}&q=$cityName&aqi=yes'),
+          '${_constants.getBaseUrl}forecast.json?key=${_constants.getApiKey}&q=$cityName&aqi=yes&alerts=yes'),
     );
 
     if (weatherResponse.statusCode == 200) {
@@ -48,21 +47,4 @@ class WeatherApi {
     }
   }
 
-  Future<List<HourData>> fetchWeatherForecast(String cityName) async {
-    List<HourData> forecastedWeather = [];
-    final forecastResponse = await http.get(
-      Uri.parse(
-          '${_constants.getBaseUrl}forecast.json?key=${_constants.getApiKey}&q=${cityName}&days=1&aqi=yes&alerts=no'),
-    );
-    if (forecastResponse.statusCode == 200) {
-      final data = jsonDecode(forecastResponse.body);
-      final List<dynamic> hourData = data['forecast']['forecastday'][0]['hour'];
-      final List<HourData> requiredData =
-          hourData.map((e) => HourData.fromJson(e)).toList();
-      forecastedWeather = requiredData;
-      return forecastedWeather;
-    } else {
-      throw Exception("Could not load Data");
-    }
-  }
 }

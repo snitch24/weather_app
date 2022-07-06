@@ -1,4 +1,4 @@
-class HourData {
+class HourWeather {
   final String localTime;
   final String condition;
   final int conditionCode;
@@ -10,7 +10,7 @@ class HourData {
   final int clouds;
   final int humidity;
 
-  HourData({
+  HourWeather({
     required this.windKmh,
     required this.windMph,
     required this.localTime,
@@ -23,9 +23,8 @@ class HourData {
     required this.humidity,
   });
 
-  factory HourData.fromJson(Map<String, dynamic> json) {
-    return HourData(
-   
+  factory HourWeather.fromJson(Map<String, dynamic> json) {
+    return HourWeather(
       localTime: json['time'],
       condition: json['condition']['text'],
       conditionCode: json['condition']['code'],

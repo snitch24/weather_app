@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/models/hour_weather.dart';
 import 'package:weather_app/theme/colors.dart';
 
 class BottomCard extends StatelessWidget {
   const BottomCard({
     Key? key,
-    required this.temperature,
-    required this.iconUrl,
-    required this.time,
+    required this.hourWeatherData,
     required this.isSelected,
   }) : super(key: key);
-  final String temperature;
-  final String iconUrl;
-  final String time;
+  final HourWeather hourWeatherData;
   final bool isSelected;
   @override
   Widget build(BuildContext context) {
@@ -31,22 +28,19 @@ class BottomCard extends StatelessWidget {
               )
             : null,
         borderRadius: BorderRadius.circular(35),
-        border: Border.all(
-          color: Colors.white38,
-          width: 2
-        ),
+        border: Border.all(color: Colors.white38, width: 2),
       ),
       child: Column(
         children: [
           Text(
-            "$temperature °C",
+            "${hourWeatherData.tempCelcius} °C",
             style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
           ),
-          Image.asset('icons/$iconUrl'),
+          Image.asset('icons/${hourWeatherData.imageURL}'),
           Text(
-            time.substring(10),
+            hourWeatherData.localTime.substring(10),
             style: Theme.of(context)
                 .textTheme
                 .bodySmall!
